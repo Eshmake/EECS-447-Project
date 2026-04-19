@@ -1,0 +1,24 @@
+TeamID,Name,Organization,Country,Region,ProgrammingScore,DrivingScore
+ACU1,ACU Robotics 1,Abilene Christian University,United States,TX,0,10
+AUBIE2,Auburn Robotics,Auburn University,United States,AL,82,106
+BISON1,Bison Robotics,Bison Robotics,United States,ND,10,47
+CLNKR,CLNKR,Connor's Basement,United States,IL,58,81
+CYBER,VEX U Cyber Robotics Club at Iowa State University,Iowa State University,United States,IA,30,11
+ETAMU,Lion Pride Robotics,Lion Pride Robotics,United States,TX,87,99
+FOUR4,RoboClaws,Rogers State University,United States,OK,38,75
+ILLIN1,Illini VEX Robotics,University of Illinois Urbana-Champaign,United States,IL,41,48
+ILLIN2,Illini VEX Robotics,University of Illinois Urbana-Champaign,United States,IL,0,58
+INTRT,Perfectly Lost In Transit,In Transit Robotics,United States,NE,65,97
+JACKS,JACKS,SDSU Robotics,United States,SD,76,100
+JHAWK,"RSC2e: ""if the Robot has moved during the Match""",KU Robotics,United States,KS,59,94
+KGEAR,Potassium Gears,Elemental Robotics Inc,United States,MN,27,38
+MINES,MINES Robotics,South Dakota School of Mines and Technology,United States,SD,30,51
+MTG7,Mtronics,Mechatronics group,Libya,Libya,NULL,NULL
+ORDGR,Orediggers,Colorado School of Mines,United States,CO,30,64
+RVRSE,UNO Reverse,University of Nebraska Omaha,United States,NE,30,35
+SKERS,Cornhuskers,University of Nebraska-Lincoln,United States,NE,80,114
+SYSTM,System Overload,SYSTEM ROBOTICS NON-PROFIT ASSOCIATION FOR ROBOTICS EDUCATION,United States,OR,100,103
+TNTN,Ten Ton,Ten Ton Robotics,Canada,BC,128,133
+UMN,Gopher Gold,University of Minnesota Robotics,United States,MN,107,115
+UND,Fighting Hawks,University of North Dakota,United States,ND,0,46
+WCOE,RoboRaiders,Texas Tech University Whitacre College of Engineering,United States,TX,NULL,NULL
