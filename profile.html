@@ -1,0 +1,86 @@
+<!--profile.html-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <!--page formatting-->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Profile - VEX Team Manager</title>
+  <meta name="profile" content="profile page for Vex Team Manager" />
+
+  <!--favicons-->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="favicon_io/site.webmanifest">
+  <link rel="shortcut icon" href="favicon_io/favicon.ico">
+  
+  <!--stylesheet-->
+  <link rel="stylesheet" href="profile_styles.css">
+</head>
+
+
+<body>
+
+<main>
+
+    <!-- Top Bar -->
+    <div class="topbar">
+        <div class="logo-header">
+            <img src="images/gears2.jpg" alt="logo">
+            <h1>VEX Team Manager</h1>
+        </div>
+        <div class="userInfo">
+            <strong id="usernameDisplay">User</strong> |
+            <span id="teamDisplay">Team</span>
+        </div>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Back Button -->
+    <div class="back-container">
+        <button class="back-btn" onclick="goBack()">← Back to Dashboard</button>
+    </div>
+
+    <!-- Profile Card -->
+    <div class="profile-container">
+
+        <h1>Profile</h1>
+
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="username">
+        </div>
+
+        <div class="form-group">
+            <label>New Password</label>
+            <input type="password" id="password">
+        </div>
+
+        <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" id="confirmPassword">
+        </div>
+
+        <div class="form-group">
+            <label>Team</label>
+            <select name="team" id="team">
+                <option value=""></option>
+                <option value="1">Team 1</option>
+                <option value="2">Team 2</option>
+            </select>
+        </div>
+
+        <button onclick="updateProfile()">Update Profile</button>
+
+        <div class="success" id="successMsg"></div>
+        <div class="error" id="errorMsg"></div>
+
+    </div>
+
+</main>
+
+<script src="profile_script.js"></script>
+</body>
+</html>

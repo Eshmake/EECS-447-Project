@@ -1,0 +1,157 @@
+/* profile_styles.css */
+
+:root{  
+    --text:#222;
+    --muted:#939aa9;
+    --brand:#006eff;
+    --brand2:#fb4444;
+    --border: #ddd;
+    --shadow:0 16px 40px rgba(0,0,0,.35);
+    --radius:16px;
+    --radius2:22px;
+    --max:1100px;
+
+    --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: #f4f6f8;
+    font-family:var(--sans);
+    color: var(--text);       
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+    font-size: 25px;
+}
+
+.topbar {
+    width: 100%;
+    padding: 10px 25px;
+    height: auto;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;  
+}
+
+.userInfo {
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+
+.logo-header {
+    display: flex;
+    align-items: center;   
+    gap: 10px;            
+    justify-content: left; 
+    margin-bottom: 1px;
+}
+
+.logo-header img {
+    width: 50px;   
+    height: 50px;
+    object-fit: contain;
+}
+
+.logout-btn {
+    background: #fb4444;
+    width: 200px;
+}
+
+.back-container {
+    width: 100%;
+    padding: 15px 30px 0 30px; 
+}
+
+.back-btn {
+    width: auto;             
+    padding: 8px 14px;
+    background: transparent;
+    color: var(--brand);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    background: #f0f2f5;
+}
+
+.profile-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 600px;
+    margin-top: 60px;
+    align-items: center;
+    justify-content: center;
+}
+
+.success {
+    color: green;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #0e78ea;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.error {
+    color: red;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 10px;
+}

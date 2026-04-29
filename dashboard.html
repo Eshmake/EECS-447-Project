@@ -1,0 +1,62 @@
+<!--dashboard.html-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - VEX Team Manager</title>
+<link rel="stylesheet" href="dashboard_styles.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Top Bar -->
+    <div class="topbar">
+        <div class="logo-header">
+            <img src="images/gears2.jpg" alt="logo">
+            <h1>VEX Team Manager</h1>
+        </div>
+        <div class="userInfo">
+            <strong id="usernameDisplay">User</strong> |
+            <span id="teamDisplay">Team</span>
+        </div>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>Displays</h3>
+
+            <button onclick="loadQuery('events-region')">Events by Region</button>
+            <button onclick="loadQuery('teams-region')">Teams by Region</button>
+            <button onclick="loadQuery('team-size')">Team Size</button>
+            <button onclick="loadQuery('teams-event')">Teams at Event</button>
+            <button onclick="loadQuery('events-team')">Events for Team</button>
+            <button onclick="loadQuery('avg-score')">Avg Event Score</button>
+
+            <div class="profileBtnSec">
+                <button class="profile-btn" onclick="goToProfile()">Profile</button>
+            </div>      
+        </div>
+
+        <!-- Main Content -->
+        <div class="content" id="content">
+            <h2>Welcome</h2>
+            <p>Select a display from the left.</p>
+        </div>
+
+        
+
+    </div>
+
+</div>
+
+<script src="dashboard_script.js"></script>
+</body>
+</html>
