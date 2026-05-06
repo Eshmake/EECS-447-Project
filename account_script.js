@@ -1,24 +1,30 @@
 //account.js
 
-const API = "http://localhost:4000";
-
 window.onload = loadTeams;
 
 function loadTeams() {
-    fetch(`${API}/teams`)
-        .then(res => res.json())
+    fetch("/getTeams.php")
+        .then(res => {
+            if (!res.ok) {
+                throw new Error("Failed to fetch teams");
+            }
+            return res.json();
+        })
         .then(data => {
-            const dropdown = document.getElementById('team');
+            const dropdown = document.getElementById("team");
 
-            // empty option
+            // Clear + default option
             dropdown.innerHTML = '<option value="">Select a team</option>';
 
             data.forEach(team => {
-                const option = document.createElement('option');
+                const option = document.createElement("option");
                 option.value = team.TeamID;
-                option.textContent = team.Name;
+                option.textContent = `${team.TeamID} - ${team.Team_Name}`;
                 dropdown.appendChild(option);
             });
+        })
+        .catch(err => {
+            console.error("Error loading teams:", err);
         });
 }
 
@@ -42,17 +48,18 @@ async function createAccount() {
     }
 
     try {
-        const res = await fetch(`${API}/createAccount`, {
+        const res = await fetch("/createAccount.php", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ username, password, team })
         });
 
-        if (res.ok) {
-            // Redirect to login after success
-            window.location.href = "login.html";
+        const data = await res.json();
+
+        if (!data.success) {
+            errorMsg.innerText = data.message;
         } else {
-            errorMsg.innerText = "Username already exists.";
+            window.location.href = "login.html";
         }
 
     } catch (err) {

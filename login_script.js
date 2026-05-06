@@ -1,6 +1,5 @@
 //login_script.js
 
-const API = "http://localhost:4000";
 
 async function handleLogin() {
     const username = document.getElementById("username").value;
@@ -14,7 +13,7 @@ async function handleLogin() {
     }
 
     try {
-        const res = await fetch(`${API}/login`, {
+        const res = await fetch("/login.php", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ username, password })

@@ -1,17 +1,16 @@
 //dashboard.js
 
-const API = "http://localhost:4000";
 
 window.onload = async function () {
     const userId = localStorage.getItem("userId");
 
-    const res = await fetch(`${API}/dashboard?userId=${userId}`);
+    const res = await fetch("/getProfile.php?userId=" + userId);
     const data = await res.json();
 
     const user = data[0];
 
     document.getElementById("usernameDisplay").innerText = user.UserID;
-    document.getElementById("teamDisplay").innerText = user.TeamID;
+    document.getElementById("teamDisplay").innerText = user.Team_Name;
 };
 
 function loadQuery(type) {
@@ -22,7 +21,7 @@ function loadQuery(type) {
             <div class="query-card">
                 <h2>Events by Region</h2>
                 <input id="region" placeholder="Enter region">
-                <button onclick="getData('/events', 'region')">Search</button>
+                <button onclick="getData('events.php', 'region')">Search</button>
                 <div id="results"></div>
                 <img id="spinner" src="images/gears2.jpg" class="spinner-img">
             </div>
@@ -32,7 +31,7 @@ function loadQuery(type) {
             <div class="query-card">
                 <h2>Teams by Region</h2>
                 <input id="region" placeholder="Enter Region">
-                <button onclick="getData('/teamsByRegion', 'region')">Search</button>
+                <button onclick="getData('teamsByRegion.php', 'region')">Search</button>
                 <div id="results"></div>
                 <img id="spinner" src="images/gears2.jpg" class="spinner-img">
             </div>
@@ -42,7 +41,7 @@ function loadQuery(type) {
             <div class="query-card">
                 <h2>Team Size</h2>
                 <input id="teamId" placeholder="Enter Team ID">
-                <button onclick="getData('/teamSize', 'teamId')">Search</button>
+                <button onclick="getData('teamSize.php', 'teamId')">Search</button>
                 <div id="results"></div>
                 <img id="spinner" src="images/gears2.jpg" class="spinner-img">
             </div>
@@ -52,7 +51,7 @@ function loadQuery(type) {
             <div class="query-card">
                 <h2>Teams at an Event</h2>
                 <input id="eventCode" placeholder="Enter Event Code">
-                <button onclick="getData('/teamsAtEvent', 'eventCode')">Search</button>
+                <button onclick="getData('teamsAtEvent.php', 'eventCode')">Search</button>
                 <div id="results"></div>
                 <img id="spinner" src="images/gears2.jpg" class="spinner-img">
             </div>
@@ -62,7 +61,7 @@ function loadQuery(type) {
             <div class="query-card">
                 <h2>Events for a Team</h2>
                 <input id="teamId" placeholder="Enter a team ID">
-                <button onclick="getData('/teamEvents', 'teamId')">Search</button>
+                <button onclick="getData('teamEvents.php', 'teamId')">Search</button>
                 <div id="results"></div>
                 <img id="spinner" src="images/gears2.jpg" class="spinner-img">
             </div>
@@ -72,7 +71,7 @@ function loadQuery(type) {
             <div class="query-card">
                 <h2>Average Score at an Event</h2>
                 <input id="eventCode" placeholder="Enter an event code">
-                <button onclick="getData('/avgScore', 'eventCode')">Search</button>
+                <button onclick="getData('avgScore.php', 'eventCode')">Search</button>
                 <div id="results"></div>
                 <img id="spinner" src="images/gears2.jpg" class="spinner-img">
             </div>
@@ -97,17 +96,20 @@ async function getData(path, id) {
     results.innerHTML = "";
 
     try {
-        const res = await fetch(`${API}${path}?${id}=${encodeURIComponent(idValue)}`);
-        const data = await res.json();
+        const res = await fetch(`/${path}?${id}=${encodeURIComponent(idValue)}`);
+        let data = await res.json();
+
+        if (!Array.isArray(data)) {
+            data = [data];
+        }
 
         renderTable(data);
-        
+
     } catch (error) {
-        results.innerHTML = "Error loading data."
+        results.innerHTML = "Error loading data.";
     }
 
     spinner.classList.remove("spinner-active");
-
 }
 
 
@@ -115,21 +117,27 @@ async function getData(path, id) {
 function renderTable(data) {
     const results = document.getElementById("results");
 
-    if (!data.length) {
+    if (!data || data.length === 0) {
         results.innerHTML = "No results found.";
         return;
     }
 
+    const allNull = Object.values(data[0]).every(val => val === null);
+
+    if (allNull) {
+        results.innerHTML = "No results found.";
+        return;
+    }
+
+
     let table = "<table><tr>";
 
-    // headers
     Object.keys(data[0]).forEach(key => {
         table += `<th>${key}</th>`;
     });
 
     table += "</tr>";
 
-    // rows
     data.forEach(row => {
         table += "<tr>";
         Object.values(row).forEach(val => {
@@ -143,11 +151,12 @@ function renderTable(data) {
     results.innerHTML = table;
 }
 
-function logout() {
-    window.location.href = "login.html";
+function goToProfile(){
+    window.location.href = "profile.html";
 }
 
-function goToProfile() {
-    window.location.href = "profile.html";
+function logout(){
+    window.location.href = "login.html";
+    localStorage.removeItem("userId");
 }
 

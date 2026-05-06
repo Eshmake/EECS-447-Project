@@ -1,7 +1,5 @@
 //profile.js
 
-const API = "http://localhost:4000";
-
 window.onload = async function () {
 
     try {
@@ -9,7 +7,7 @@ window.onload = async function () {
         
         await loadTeams();
 
-        const res = await fetch(`${API}/profile?userId=${userId}`);
+        const res = await fetch("/getProfile.php?userId=" + userId);
         const data = await res.json();
 
         const user = data[0];
@@ -17,11 +15,11 @@ window.onload = async function () {
         document.getElementById("username").value = user.UserID;
         document.getElementById("team").value = user.TeamID;
 
-        document.getElementById("password").value = user.Password;
-        document.getElementById("confirmPassword").value = user.Password;
+        document.getElementById("password").value = user.User_Password;
+        document.getElementById("confirmPassword").value = user.User_Password;
 
         document.getElementById("usernameDisplay").innerText = user.UserID;
-        document.getElementById("teamDisplay").innerText = user.TeamID;
+        document.getElementById("teamDisplay").innerText = user.Team_Name;
 
     } catch (error) {
         console.error("Failed to load profile.", error);
@@ -29,22 +27,20 @@ window.onload = async function () {
     
 };
 
-function loadTeams() {
-    fetch(`${API}/teams`)
-        .then(res => res.json())
-        .then(data => {
-            const dropdown = document.getElementById('team');
+async function loadTeams() {
+    const res = await fetch("/getTeams.php");
+    const data = await res.json();
 
-            // empty option
-            dropdown.innerHTML = '<option value="">Select a team</option>';
+    const dropdown = document.getElementById('team');
 
-            data.forEach(team => {
-                const option = document.createElement('option');
-                option.value = team.TeamID;
-                option.textContent = team.Name;
-                dropdown.appendChild(option);
-            });
-        });
+    dropdown.innerHTML = '<option value="">Select a team</option>';
+
+    data.forEach(team => {
+        const option = document.createElement('option');
+        option.value = team.TeamID;
+        option.textContent = team.Team_Name;
+        dropdown.appendChild(option);
+    });
 }
 
 async function updateProfile() {
@@ -52,6 +48,8 @@ async function updateProfile() {
     const password = document.getElementById("password").value;
     const confirm = document.getElementById("confirmPassword").value;
     const team = document.getElementById("team").value;
+
+    const userId = localStorage.getItem("userId");
 
     const successMsg = document.getElementById("successMsg");
     const errorMsg = document.getElementById("errorMsg");
@@ -71,18 +69,23 @@ async function updateProfile() {
 
     try {
         
-        const res = await fetch("/update-profile", {
+        const res = await fetch("/updateProfile.php", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({username, password, team})
+            body: JSON.stringify({userId, username, password, team})
         });
 
-        if(res.ok){
+        const data = await res.json();
+
+        if (data.success) {
             successMsg.innerText = "Profile updated successfully.";
+
+            localStorage.setItem("userId", username);
+
         } else {
-            errorMsg.innerText = "Update failed.";
+            errorMsg.innerText = data.message || "Update failed.";
         }
-        
+
     } catch (error) {
         errorMsg.innerText = "Server error.";
     }
@@ -91,6 +94,7 @@ async function updateProfile() {
 
 function logout() {
     window.location.href = "login.html";
+    localStorage.removeItem("userId");
 }
 
 function goBack() {
